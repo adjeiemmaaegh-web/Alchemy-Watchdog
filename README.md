@@ -1,7 +1,7 @@
 # ALCHEMY — marketing website package
 
 ## Launch locally
-Double-click `index.html` in an up-to-date browser. No build system or installation required. All nine pages use shared `assets/style.css` and `assets/app.js`.
+Double-click `index.html` in an up-to-date browser. No build system or installation required. All eleven pages use shared `assets/style.css` and `assets/app.js`.
 
 ## What is included
 - Unified Alchemy parent brand and dedicated Watchdog and Tallybook pages.
@@ -19,3 +19,10 @@ Double-click `index.html` in an up-to-date browser. No build system or installat
 
 ## Developer details
 Pure HTML/CSS/vanilla JS. No npm, APIs, remote forms or external JS libraries. Sitemap can be authored after the final domain is chosen. No actual payment, subscriptions, software downloads, or automated surveillance claims.
+
+## Watchdog learning and FAQ
+- `learn.html`: six beginner lessons with one multiple-choice question each. Browser-local completion only, no accounts or telemetry. Reset progress clears the local completion markers.
+- `faq.html`: 17 searchable questions across setup, stores, camera/AI, privacy and integration. Search runs only in the browser; questions remain available without JavaScript.
+- `assets/learning.js`, `assets/faq.js`: progressive enhancements. The content is static HTML and must be validated against the exact Windows build before customer use.
+- Current training content describes an **unreleased development preview**. It does not claim finished installer availability, live Tallybook integration, validated theft detection, or production approval.
+- Review navigation, mobile layout, keyboard use and storage-denied behavior before merging; no live browser or hosting deployment was performed by this change.
