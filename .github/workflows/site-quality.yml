@@ -1,0 +1,26 @@
+name: Alchemy static site quality
+on:
+  push:
+    branches: [improve/**]
+  pull_request:
+    paths:
+      - '**.html'
+      - 'assets/**'
+      - 'tests/**'
+      - '.github/workflows/site-quality.yml'
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax checks
+        run: |
+          for file in assets/*.js; do node --check "$file"; done
+          node --check tests/site.test.mjs
+      - name: Built-in site regression suite
+        run: node --test tests/site.test.mjs

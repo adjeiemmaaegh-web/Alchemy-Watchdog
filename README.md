@@ -26,3 +26,12 @@ Pure HTML/CSS/vanilla JS. No npm, APIs, remote forms or external JS libraries. S
 - `assets/learning.js`, `assets/faq.js`: progressive enhancements. The content is static HTML and must be validated against the exact Windows build before customer use.
 - Current training content describes an **unreleased development preview**. It does not claim finished installer availability, live Tallybook integration, validated theft detection, or production approval.
 - Review navigation, mobile layout, keyboard use and storage-denied behavior before merging; no live browser or hosting deployment was performed by this change.
+
+## Quality hardening (October 2026)
+- All pages use one consistent primary navigation and footer, plus a visible mobile contact action.
+- The inquiry form is a **local message generator**. It does not send messages, collect registrations, or store personal details. Copy works with a manual fallback. Display-only placeholder: `hello@alchemy.example`.
+- Only after verifying an inbox, set `contactEmail` in `assets/site-config.js` to enable an optional user-initiated `mailto:` link. That is still not a registration backend.
+- Run `node --test tests/site.test.mjs` and `node --check assets/app.js` before review. GitHub Actions performs repository checks.
+- There is **no backend**, cloud storage, telemetry, real-time product demo, or customer registration. No payment or production deployment is authorized by this change.
+- Privacy/terms remain draft pending legal and owner review. A canonical site URL and complete external SEO assets require an approved final domain.
+- Verify on Windows, macOS, Android and iOS browsers before launch. Human keyboard, screen reader, and visual QA remain mandatory.
