@@ -44,3 +44,15 @@ test('styles include reduced motion, responsive navigation, and visible keyboard
  const css=read('assets/style.css');
  for(const v of ['prefers-reduced-motion','focus-visible','max-width: 980px','.navlinks.open','.inquiry-preview'])assert.ok(css.includes(v),v);
 });
+
+test('contact form stays inactive without JavaScript (no personal data in URL)', () => {
+  const html = read('contact.html');
+  const css = read('assets/style.css');
+  const js = read('assets/app.js');
+  assert.ok(html.includes('class="nojs-note"'));
+  assert.ok(html.includes('method="post"'));
+  assert.ok(css.includes('#interest-form { display: none; }'));
+  assert.ok(css.includes('.js #interest-form { display: block; }'));
+  assert.ok(css.includes('.js .navlinks { display: none; }'));
+  assert.ok(js.includes("classList.add('js')"));
+});

@@ -35,3 +35,6 @@ Pure HTML/CSS/vanilla JS. No npm, APIs, remote forms or external JS libraries. S
 - There is **no backend**, cloud storage, telemetry, real-time product demo, or customer registration. No payment or production deployment is authorized by this change.
 - Privacy/terms remain draft pending legal and owner review. A canonical site URL and complete external SEO assets require an approved final domain.
 - Verify on Windows, macOS, Android and iOS browsers before launch. Human keyboard, screen reader, and visual QA remain mandatory.
+
+## Browser regression checks
+GitHub Actions installs Playwright Chromium in the CI environment and executes `node tests/browser.test.mjs`. The script checks every page at 390, 768 and 1440 pixels for unexpected overflow and JavaScript errors, mobile menu operation, local-only form preparation, FAQ search, course progress, and privacy-safe behavior with JavaScript disabled. Screenshots are uploaded as CI artifacts. These tests are not a replacement for independent manual mobile/Safari and assistive technology testing.

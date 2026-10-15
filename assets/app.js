@@ -1,6 +1,7 @@
 /* Lightweight, progressively enhanced site interaction. No analytics or form backend. */
 (() => {
   'use strict';
+  document.documentElement.classList.add('js');
   const year = document.getElementById('yr');
   if (year) year.textContent = String(new Date().getFullYear());
 

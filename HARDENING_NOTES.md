@@ -16,3 +16,9 @@ Scope: static parent-brand marketing site only. No Watchdog Windows engine or Ta
 - Approve legal/privacy copy and official website domain; configure canonical tags, sitemap and production email delivery only after approval.
 - Run browser/assistive technology visual QA, mobile breakpoints, and deployment smoke tests. Confirm claims with current Watchdog/Tallybook release evidence.
 - No deploy, main-branch merge, cloud service, payment or production release in this work.
+
+## Follow-up: no-JavaScript privacy and browser QA
+- Contact form remains hidden until JavaScript explicitly activates the local-only preview; avoids accidental GET submission of visitor data
+- Navigation remains visible as a stacked list with JavaScript disabled on narrow screens
+- GitHub Actions Chromium browser suite checks all ten pages at 390/768/1440 widths, menu Escape, local inquiry preview, FAQ, course and no-JS privacy, with screenshot artifacts
+- Browser QA checks are CI-gated; do not claim success until the latest GitHub Actions run passes
