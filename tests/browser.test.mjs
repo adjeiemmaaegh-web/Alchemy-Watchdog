@@ -25,7 +25,7 @@ try {
       }));
       assert.ok(dimensions.content <= dimensions.viewport + 2, filename + ' at ' + width + 'px overflows: ' + JSON.stringify(dimensions));
       assert.deepEqual(errors, [], filename + ': JS exceptions');
-      if (filename === 'index.html' || filename === 'contact.html') {
+      if (['index.html', 'contact.html', 'learn.html'].includes(filename)) {
         await page.screenshot({ path: 'artifacts/' + filename.replace('.html', '') + '-' + width + '.png', fullPage: true });
       }
       checked += 1;
@@ -64,10 +64,23 @@ try {
   assert.ok((await page.locator('#faq-count').textContent()).includes('17 of 17'), 'restored FAQs');
 
   await page.goto(pathToFileURL(resolve(root, 'learn.html')).href);
+  assert.equal(await page.locator('.academy-module img').count(), 6, 'six illustrated module cards');
+  assert.equal(await page.locator('.academy-hero-art img').count(), 1, 'hero illustration');
+  const brokenImages = await page.locator('.academy-page img').evaluateAll(nodes => nodes.filter(img => !img.complete || !img.naturalWidth).map(img => img.src));
+  assert.deepEqual(brokenImages, [], 'academy illustrations load');
+  assert.equal(await page.locator('.academy-lesson:visible').count(), 1, 'single focused lesson');
+  await page.locator('[data-open-lesson="1"]').first().click();
+  assert.equal(await page.locator('.academy-lesson:visible').count(), 1, 'switch module');
+  assert.ok(await page.locator('#lesson-2').isVisible(), 'second lesson appears');
+  await page.locator('[data-open-lesson="0"]').first().click();
   const lesson = page.locator('[data-quiz="0"]');
   await lesson.locator('input[value="1"]').check();
   await lesson.locator('button[type="submit"]').click();
   assert.ok((await page.locator('#course-progress').textContent()).includes('1 of 6'), 'learning progress');
+  await page.reload();
+  assert.ok((await page.locator('#course-progress').textContent()).includes('1 of 6'), 'progress persists in same browser');
+  await page.locator('#course-reset').click();
+  assert.ok((await page.locator('#course-progress').textContent()).includes('0 of 6'), 'reset restores progress');
 
   const noJs = await browser.newContext({ viewport: { width: 390, height: 840 }, javaScriptEnabled: false });
   const noJsPage = await noJs.newPage();
