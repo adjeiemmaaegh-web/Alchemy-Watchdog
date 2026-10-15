@@ -38,3 +38,9 @@ Pure HTML/CSS/vanilla JS. No npm, APIs, remote forms or external JS libraries. S
 
 ## Browser regression checks
 GitHub Actions installs Playwright Chromium in the CI environment and executes `node tests/browser.test.mjs`. The script checks every page at 390, 768 and 1440 pixels for unexpected overflow and JavaScript errors, mobile menu operation, local-only form preparation, FAQ search, course progress, and privacy-safe behavior with JavaScript disabled. Screenshots are uploaded as CI artifacts. These tests are not a replacement for independent manual mobile/Safari and assistive technology testing.
+
+## Alchemy Learning Center redesign — 2026-10-15
+- The Learn page uses seven original, self-hosted SVG teaching illustrations, without analytics or externally loaded pictures. They are diagrams, **not** verified Windows UI screenshots or surveillance evidence.
+- Six visual module cards, an illustrated hero, an accessible one-lesson-at-a-time learning flow (all lessons remain readable when JavaScript is disabled), action steps, responsible-usage callouts, quizzes with correct-answer explanations and Previous/Next actions.
+- Preserves previous course progress with the same `alchemy-watchdog-course-v1` browser storage key. State is device-local; resets never transmit data.
+- Browser CI verifies illustrations, one active lesson, module switching, course progress persistence and reset at responsive widths. Manual AT/Firefox/Safari reviews remain pending.

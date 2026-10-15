@@ -56,3 +56,17 @@ test('contact form stays inactive without JavaScript (no personal data in URL)',
   assert.ok(css.includes('.js .navlinks { display: none; }'));
   assert.ok(js.includes("classList.add('js')"));
 });
+
+test('academy has six accessible, illustrated modules and a functional lesson structure',()=>{
+  const html = read('learn.html');
+  const js = read('assets/learning.js');
+  assert.equal((html.match(/class="academy-module"/g)||[]).length,6,'6 module cards');
+  assert.equal((html.match(/class="academy-lesson"/g)||[]).length,6,'6 lesson panels');
+  assert.equal((html.match(/data-quiz="/g)||[]).length,6,'6 quizzes');
+  assert.ok(html.includes('id="course-progress"') && html.includes('id="course-reset"'),'preserve v1 progress controls');
+  assert.ok(html.includes('id="course-resume"'),'resume action');
+  assert.ok(js.includes("alchemy-watchdog-course-v1"),'preserve earlier progress');
+  for(let i=1;i<=6;i++) assert.ok(existsSync(resolve(root,'assets/learn/lesson-'+i+'.svg')),'missing SVG lesson '+i);
+  assert.ok(existsSync(resolve(root,'assets/learn/academy-hero.svg')),'missing hero SVG');
+  for(let i=0;i<6;i++)assert.ok(html.includes('data-explanation='),'answer explanations present');
+});
