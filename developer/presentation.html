@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Alchemy Watchdog | Investor & Stakeholder Presentation</title>
+<meta name="description" content="The complete 19-slide Alchemy Watchdog investor presentation. Self-contained, offline, and faithful to the PowerPoint.">
+<style>
+:root {
+  --bg: #071422; --panel: #0e2335; --panel2:#122b41; --edge:#30475a;
+  --text:#eff8fc; --muted:#a6bac8; --mint:#24d2ab; --blue:#4890ff; --violet:#9471fe;
+}
+* {box-sizing:border-box}
+html, body {height:100%; margin:0}
+body {background:var(--bg); color:var(--text); font:15px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif; overflow:hidden}
+button, input {font:inherit}
+button {cursor:pointer}
+button:focus-visible, input:focus-visible, .thumb:focus-visible, .search-result:focus-visible {outline:3px solid var(--mint);outline-offset:3px}
+button[disabled] {opacity:.35;cursor:not-allowed}
+#app {height:100dvh;display:flex;flex-direction:column}
+.topbar {height:70px;min-height:70px;background:rgba(9,26,42,.98);border-bottom:1px solid var(--edge);
+ display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 23px;z-index:10}
+.brand {display:flex;align-items:center;gap:12px;min-width:0}
+.logo {width:34px;height:34px;border:2px solid var(--mint);border-radius:11px;display:grid;place-items:center;
+ color:var(--mint);font-size:21px;font-weight:900;transform:rotate(-6deg);flex-shrink:0}
+.brand-name {font-size:14px;font-weight:850;letter-spacing:.105em}
+.brand-sub {color:var(--muted);font-size:12px;margin-top:1px}
+.top-actions {display:flex;gap:10px;align-items:center}
+.pill {color:var(--muted);border:1px solid #38546b;border-radius:99px;padding:5px 10px;font-size:11px;
+ font-weight:750;letter-spacing:.045em;white-space:nowrap}
+.pill .status-dot {display:inline-block;width:7px;height:7px;background:var(--mint);border-radius:50%;margin-right:6px}
+.h-btn {border:1px solid #36526a;color:var(--text);background:var(--panel);border-radius:9px;
+ min-height:38px;padding:7px 12px;font-weight:650}
+.h-btn:hover,.control:hover:not(:disabled) {background:#1a3a51}
+.workspace {flex:1;display:flex;min-height:0;position:relative}
+.thumb-rail {flex:0 0 248px;width:248px;border-right:1px solid var(--edge);background:#0a1c2b;
+ overflow-y:auto;overscroll-behavior:contain;padding:14px;scrollbar-color:#48677b transparent}
+.thumb-rail[hidden] {display:none}
+.rail-title {color:#a9c7d5;font-weight:800;letter-spacing:.14em;font-size:10px;margin:0 0 12px}
+.thumb {width:100%;background:transparent;border:1px solid transparent;border-radius:10px;
+ text-align:left;padding:8px;color:var(--text);display:block;margin:0 0 10px}
+.thumb:hover {background:#193448}
+.thumb.active {background:#163a49;border-color:var(--mint)}
+.thumb img {width:100%;display:block;aspect-ratio:1601/900;object-fit:contain;border-radius:5px;background:#fff}
+.thumb-meta {display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:6px}
+.thumb-title {font-size:11px;font-weight:720;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.thumb-index {color:var(--muted);font-size:10px;font-variant-numeric:tabular-nums}
+.stage {flex:1;min-width:0;display:flex;flex-direction:column;background:radial-gradient(ellipse at 50% 40%,#14314b 0%, #071422 78%)}
+.stage-header {height:46px;min-height:46px;padding:8px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.slide-label {display:flex;align-items:center;gap:10px;min-width:0}
+.slide-title {font-size:13px;font-weight:750;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.edition {font-size:10px;letter-spacing:.08em;border-radius:50px;padding:3px 9px;font-weight:800;
+ text-transform:uppercase;background:#183e48;color:#54e5bd;white-space:nowrap}
+.edition.Professional{background:#162f56;color:#79adff}
+.edition.Enterprise{background:#30224e;color:#bea5ff}
+.edition.Business{background:#343243;color:#c9c3e0}
+.edition.Vision{background:#24364a;color:#a7bfd0}
+.stage-count {color:var(--muted);white-space:nowrap;font-size:12px;font-variant-numeric:tabular-nums}
+.frame-wrap {flex:1;min-height:0;padding:3px 23px 22px;display:flex;align-items:center;justify-content:center}
+.slide-visual {display:block;width:auto;height:auto;max-width:100%;max-height:100%;aspect-ratio:1601/900;
+ object-fit:contain;background:#fff;box-shadow:0 18px 60px rgba(0,0,0,.36);border-radius:3px}
+.toolbar {min-height:70px;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;gap:15px;
+ background:rgba(8,23,36,.98);border-top:1px solid var(--edge);z-index:9}
+.controls {display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.control {background:var(--panel);border:1px solid #34536c;color:var(--text);border-radius:9px;
+ height:39px;min-width:39px;padding:8px 11px;font-weight:700;font-size:13px}
+.control.primary {border-color:#22bd9c;background:#115844;color:#fff}
+.control.primary:hover {background:#14765d}
+.counter {font-size:13px;color:#cee2eb;font-variant-numeric:tabular-nums;font-weight:800;min-width:50px;text-align:center}
+.progress {flex:1;height:4px;border-radius:8px;background:#274055;max-width:270px;overflow:hidden}
+.progress-fill {height:100%;width:5.263%;background:var(--mint);transition:width .2s ease}
+.keyboard-hint {color:#89a4b5;font-size:11px;white-space:nowrap}
+.drawer {position:absolute;right:12px;top:12px;bottom:12px;z-index:20;width:min(470px,calc(100% - 24px));
+ background:#0c2234;border:1px solid #3d5c70;box-shadow:0 30px 80px #0009;border-radius:14px;
+ display:flex;flex-direction:column;overflow:hidden}
+.drawer[hidden] {display:none}
+.drawer-head {display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--edge);padding:15px 18px}
+.drawer-title {font-size:17px;font-weight:800}
+.close-btn {color:var(--text);border:0;background:transparent;font-size:25px;line-height:1;cursor:pointer}
+.drawer-body {padding:18px;overflow:auto;line-height:1.65;flex:1}
+.copy-text {white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;color:#dceaf2}
+.segmented {display:flex;gap:7px;padding:14px 18px 0}
+.segmented button {background:#1b384d;border:1px solid #345772;color:#bcd5e1;border-radius:7px;padding:8px 14px}
+.segmented button.selected {background:#216351;color:#fff;border-color:var(--mint)}
+.search-bar {display:flex;align-items:center;gap:7px;padding:16px;border-bottom:1px solid var(--edge)}
+.search-bar input {width:100%;border:1px solid #416177;background:#051929;padding:12px;color:white;border-radius:8px}
+.search-result {display:block;width:100%;padding:11px 12px;border:1px solid #30495a;border-radius:9px;background:#102e43;
+ text-align:left;color:var(--text);margin-bottom:8px;cursor:pointer}
+.search-result:hover {background:#1a4055}
+.search-result strong {display:block;font-size:13px}
+.search-result span {display:block;font-size:12px;color:#a9c0cd;margin-top:3px}
+.small-muted {color:var(--muted);font-size:12px}
+.reader {display:none;flex:1;overflow-y:auto;background:#081827;padding:28px 0 72px;scrollbar-color:#52677c transparent}
+.reader-inner {max-width:1300px;padding:0 25px;margin:auto}
+.reader-slide {margin:0 0 34px}
+.reader-slide img {display:block;width:100%;height:auto;box-shadow:0 14px 50px #0005;background:white}
+.reader-slide figcaption {color:#c0d0d9;font-size:12px;margin:9px 0}
+body.reading .stage-header, body.reading .frame-wrap,body.reading .thumb-rail {display:none!important}
+body.reading .reader {display:block}
+body.reading .toolbar .nav-only {display:none}
+#help-modal {position:fixed;inset:0;z-index:70;background:#03111ccc;display:grid;place-items:center;padding:18px}
+#help-modal[hidden] {display:none}
+.help-card {max-width:520px;background:#10283b;border:1px solid #4a657a;box-shadow:0 28px 120px #0009;padding:25px;
+ border-radius:15px;width:100%}
+.help-card h2 {margin:0 0 14px;font-size:22px}
+.help-keys {display:grid;grid-template-columns:130px 1fr;gap:11px 18px;color:#bed4e0;font-size:14px}
+kbd {background:#244155;border:1px solid #506477;border-radius:5px;color:#fff;padding:3px 7px;display:inline-block;font-family:inherit}
+#help-modal .help-footer {text-align:right;margin-top:20px}
+#print-deck {display:none}
+@media(max-width:780px){
+ .topbar {height:57px;min-height:57px;padding:0 12px}
+ .brand-name {font-size:11px}
+ .brand-sub {font-size:10px}
+ .logo {width:29px;height:29px}
+ .top-actions .pill {display:none}
+ .top-actions .h-btn {font-size:12px;padding:6px 9px}
+ .thumb-rail {position:absolute;z-index:18;left:0;top:0;bottom:0;width:min(275px,80vw);box-shadow:20px 0 45px #0009}
+ .stage-header {height:45px;padding:8px 12px}
+ .frame-wrap {padding:1px 7px 8px}
+ .toolbar {padding:7px;min-height:65px;gap:5px}
+ .controls {gap:5px}
+ .control {min-width:36px;height:36px;padding:5px 8px;font-size:12px}
+ .keyboard-hint,.progress {display:none}
+ .slide-title {font-size:12px}
+ .edition {font-size:9px}
+}
+@media(max-width:430px){
+ .top-actions .notes-short {display:none}
+ .control.secondary-mobile {display:none}
+ .stage-count {font-size:10px}
+}
+@media print {
+ @page { size:16in 9in; margin:0 }
+ html,body {margin:0!important;padding:0!important;background:white!important;height:auto!important;overflow:visible!important}
+ #app,#help-modal {display:none!important}
+ #print-deck {display:block!important}
+ .print-slide {width:16in;height:9in;margin:0;break-after:page;page-break-after:always;overflow:hidden}
+ .print-slide img {width:100%;height:100%;display:block}
+ .print-slide:last-child {break-after:auto;page-break-after:auto}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">A</div>
+      <div>
+        <div class="brand-name">ALCHEMY WATCHDOG</div>
+        <div class="brand-sub">Investor & stakeholder presentation</div>
+      </div>
+    </div>
+    <div class="top-actions"><a class="h-btn" style="text-decoration:none;display:inline-flex;align-items:center" href="../for-developer.html" title="Back to For Developer">← <span class="notes-short">For Developer</span></a>
+      <span class="pill"><span class="status-dot"></span>100% OFFLINE</span>
+      <button class="h-btn" id="search-open" title="Search slide text">⌕ <span class="notes-short">Search</span></button>
+      <button class="h-btn" id="notes-open" title="Speaker notes and slide transcript">☰ <span class="notes-short">Notes</span></button>
+    </div>
+  </header>
+  <div class="workspace">
+    <aside class="thumb-rail" id="thumb-rail" aria-label="Slide thumbnails">
+      <p class="rail-title">ALL 19 SLIDES</p>
+      <div id="thumb-list"></div>
+    </aside>
+    <main class="stage">
+      <div class="stage-header">
+        <div class="slide-label">
+          <span class="edition" id="edition"></span>
+          <span class="slide-title" id="slide-title"></span>
+        </div>
+        <span class="stage-count" id="stage-count">01 / 19</span>
+      </div>
+      <div class="frame-wrap" id="frame-wrap">
+        <img id="slide-visual" class="slide-visual" alt="" draggable="false">
+      </div>
+      <div class="reader" id="reader" aria-label="Continuous reading view"><div class="reader-inner" id="reader-inner"></div></div>
+    </main>
+    <aside class="drawer" id="notes-drawer" hidden aria-label="Presenter notes and full slide text">
+      <div class="drawer-head">
+        <span class="drawer-title">Presenter information</span>
+        <button class="close-btn" id="notes-close" aria-label="Close notes">×</button>
+      </div>
+      <div class="segmented">
+        <button id="tab-notes" class="selected">Speaker notes</button>
+        <button id="tab-text">Slide text</button>
+      </div>
+      <div class="drawer-body">
+        <p class="small-muted" id="notes-slide-name"></p>
+        <div id="notes-content" class="copy-text"></div>
+      </div>
+    </aside>
+    <aside class="drawer" id="search-drawer" hidden aria-label="Search slides">
+      <div class="drawer-head">
+        <span class="drawer-title">Find a slide</span>
+        <button class="close-btn" id="search-close" aria-label="Close search">×</button>
+      </div>
+      <div class="search-bar"><input id="search-input" type="search" placeholder="Try “Enterprise”, “loss”, or “investment”" aria-label="Search slide content"></div>
+      <div class="drawer-body" id="search-results"></div>
+    </aside>
+  </div>
+  <footer class="toolbar">
+    <div class="controls">
+      <button class="control" id="toggle-rail" title="Show or hide slide thumbnails (T)" aria-label="Toggle slide thumbnails">▦</button>
+      <button class="control nav-only" id="prev" title="Previous slide (←)" aria-label="Previous slide">◀</button>
+      <div class="counter nav-only" id="counter">01 / 19</div>
+      <button class="control primary nav-only" id="next" title="Next slide (→)" aria-label="Next slide">Next →</button>
+      <button class="control secondary-mobile" id="reader-toggle" title="Toggle scrolling view (V)" aria-label="Toggle scrolling view">☷ View</button>
+      <button class="control secondary-mobile" id="print-button" title="Print or Save as PDF" aria-label="Print or save slides as PDF">⎙ PDF</button>
+      <button class="control" id="fullscreen" title="Fullscreen (F)" aria-label="Toggle fullscreen">⛶</button>
+      <button class="control" id="help" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts">?</button>
+    </div>
+    <div class="progress" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="keyboard-hint">← → to navigate · T thumbnails · N notes · F fullscreen</div>
+  </footer>
+</div>
+<div id="help-modal" hidden role="dialog" aria-modal="true" aria-label="Presentation controls">
+  <div class="help-card">
+    <h2>Present Alchemy Watchdog</h2>
+    <div class="help-keys">
+      <span><kbd>←</kbd> <kbd>→</kbd></span><span>Previous / next slide</span>
+      <span><kbd>Home</kbd> / <kbd>End</kbd></span><span>First / last slide</span>
+      <span><kbd>T</kbd></span><span>Show or hide all slide thumbnails</span>
+      <span><kbd>N</kbd></span><span>Presenter notes and searchable slide text</span>
+      <span><kbd>/</kbd></span><span>Search slides</span>
+      <span><kbd>V</kbd></span><span>Continuous scrolling presentation</span>
+      <span><kbd>F</kbd></span><span>Enter or leave fullscreen</span>
+      <span><kbd>Esc</kbd></span><span>Close a panel</span>
+    </div>
+    <p class="small-muted" style="margin-top:18px">Slides are faithfully rendered from the PowerPoint, all embedded in this HTML. No network or installation required.</p>
+    <div class="help-footer"><button class="h-btn" id="help-close">Got it</button></div>
+  </div>
+</div>
+<div id="print-deck" aria-hidden="true"></div>
+<script id="deck-json" type="application/json">[{"number":1,"title":"Alchemy Watchdog — Investor Vision","tier":"Vision","image":"slides/slide-01.png","thumb":"slides/slide-01.png","text":"INVESTOR & STAKEHOLDER VISION\nALCHEMY\nWATCHDOG\nRetail intelligence for\nevery stage of growth.\nStart affordable. Go deeper. Scale with confidence.\nPRODUCT STRATEGY  /  OCTOBER 2026","notes":"Open with the vision. Alchemy Watchdog is being developed as a retail loss-prevention platform with a low-cost entry product and a longer-term path to premium capability. Avoid implying the full system is available or commercially proven today. Generated photographs are illustrations, not real footage or product screenshots."},{"number":2,"title":"The Problem — Everyday Retail Loss","tier":"Vision","image":"slides/slide-02.png","thumb":"slides/slide-02.png","text":"THE PROBLEM\nRetail losses hide in everyday moments.\nCameras may record what happened. Retailers still struggle to understand what it means.\n01  UNSEEN MOMENTS\nImportant activity can be missed when no one is watching.\n02  DISCONNECTED FACTS\nVideo and sales records often tell separate stories.\n03  SLOW INVESTIGATIONS\nFinding the right evidence can take too long.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n02","notes":"Retail losses are caused by many factors including mistakes, process issues and misconduct. Our framing does not assume every anomaly is theft. The commercial problem is the time and uncertainty involved in detecting, investigating and verifying events."},{"number":3,"title":"The Value Proposition","tier":"Vision","image":"slides/slide-03.png","thumb":"slides/slide-03.png","text":"OUR VALUE PROPOSITION\nFrom camera footage\nto useful evidence.\nHelp store owners notice unusual activity, match it with business records, and decide what to do next.\nSEE\nIdentify an event worth reviewing\nCONNECT\nCompare it with business activity\nVERIFY\nLet a person confirm what happened\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n03","notes":"The value is better information and faster review—not automatic accusations. An AI-generated alert is an indication to investigate, not proof of misconduct."},{"number":4,"title":"How Alchemy Works","tier":"Vision","image":"slides/slide-04.png","thumb":"slides/slide-04.png","text":"HOW IT WORKS\nOne clear journey from activity to action.\nA simple workflow that can gain more intelligence as customers grow.\n1. WATCH\nExisting cameras capture the activity.\n→\n2. SPOT\nSoftware identifies events worth attention.\n→\n3. COMPARE\nRelevant sales or stock records add context.\n→\n4. REVIEW\nStaff see the evidence and make the decision.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n04","notes":"Explain this as a four-step business process. The depth of the detection and comparison layers increases across tiers. The illustrated visuals are conceptual, not proof of a deployed system."},{"number":5,"title":"Three Editions, One Platform","tier":"Vision","image":"slides/slide-05.png","thumb":"slides/slide-05.png","text":"OUR PRODUCT FAMILY\nThree editions. One long-term platform.\nClear customer fit—with a practical path to more sophisticated protection.\nENTRY PRODUCT\nAFFORDABLE\nSingle-shop owners\nPractical local visibility, using equipment they may already own.\nDevelopment-stage\nGROWTH EDITION\nPROFESSIONAL\nGrowing retailers\nDeeper checkout and transaction intelligence for more complex operations.\nPlanned\nSTRATEGIC VISION\nENTERPRISE\nMulti-location chains\nCoordinated oversight, powerful investigation tools, and scale.\nLong-term vision\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n05","notes":"The tier labels are strategic packaging proposals, not an established released price list. The Affordable product is engineering-stage, while Professional and Enterprise are future product visions."},{"number":6,"title":"Affordable — Entry Product","tier":"Affordable","image":"slides/slide-06.png","thumb":"slides/slide-06.png","text":"AFFORDABLE  /  ENTRY\nProtection that\nsmall shops can\nrealistically adopt.\nA practical starting point—not an expensive command center.\nBuilt around low-cost Windows PCs and local operation.\nTHE STORE OWNER GETS\nExisting camera investment\nDesigned to work with compatible CCTV sources.\nLocal-first approach\nCore operation without constant cloud dependence.\nVideo-backed alerts\nReview incidents instead of relying on suspicion alone.\nSales context\nCompare events with imported local POS or CSV data.\nHuman decision\nStaff verify incidents before taking action.\nSTATUS: ENGINEERING PROTOTYPE • FIELD VALIDATION PENDING\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n06","notes":"The affordable vision is grounded in the current reported engineering build, not an independently verified production launch. Expected camera compatibility and 8GB Windows hardware performance still require device testing. No public price is committed."},{"number":7,"title":"Affordable — A Day in the Store","tier":"Affordable","image":"slides/slide-07.png","thumb":"slides/slide-07.png","text":"AFFORDABLE IN PRACTICE\nA simpler day for a single-store owner.\nIllustrative use case: a possible discrepancy is highlighted for careful review.\n01\nCAPTURE\nThe shop records routine activity.\n02\nHIGHLIGHT\nA relevant event is surfaced.\n03\nCHECK\nAvailable sales records are consulted.\n04\nDECIDE\nThe owner reviews a short evidence clip.\nA flagged event is a prompt to investigate—not an accusation.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n07","notes":"This is a proposed usage story, not a completed customer case study. Camera and sales data must be synchronized carefully to avoid false matches."},{"number":8,"title":"Professional — Growing Businesses","tier":"Professional","image":"slides/slide-08.png","thumb":"slides/slide-08.png","text":"PROFESSIONAL  /  PLANNED\nWhen the business grows,\nthe intelligence must\ngo deeper.\nMore advanced event recognition. Richer transaction links. Stronger investigations.\nFor supermarkets and operators managing more complex checkout and stock workflows.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n08","notes":"Professional is a future product tier. It is not a claim that the currently reported YOLO model can identify complex gestures or non-scans accurately. These capabilities need specialized models, retail training data, and real integrations."},{"number":9,"title":"Professional — Retail Understanding","tier":"Professional","image":"slides/slide-09.png","thumb":"slides/slide-09.png","text":"PROFESSIONAL EDITION\nMove from alerts to retail understanding.\nThe planned next layer connects what staff and products do with what records say.\nUnderstand checkout actions\nRecognize item-handling sequences, not only objects.\nConnect live business records\nRelate video to transactions, refunds, voids, and stock activity.\nPrioritize meaningful exceptions\nSurface events worth attention with supporting evidence.\nImprove with retailer feedback\nUse reviewed outcomes to strengthen detection over time.\nCAPABILITIES REQUIRE DEVELOPMENT, TRAINING DATA & PILOT VALIDATION\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n09","notes":"Professional differentiation comes from the quality of action recognition and live synchronization. Do not describe low-level object detection as confirmed retail gesture intelligence."},{"number":10,"title":"Professional — Checkout Scenario","tier":"Professional","image":"slides/slide-10.png","thumb":"slides/slide-10.png","text":"AN ILLUSTRATIVE SCENARIO\nA checkout moment becomes a reviewable case.\nInstead of automatically blaming a person, the system presents a question supported by evidence.\nCAMERA OBSERVATION\nAn item appears to be moved through checkout.\nTRANSACTION CONTEXT\nA matching scan cannot be confirmed from the available records.\nHUMAN REVIEW\nA reviewer checks the video and decides next steps.\n→\n→\nExample only • not a real Alchemy detection or deployed integration.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n10","notes":"Use careful language. This is a hypothetical checkout review flow. System should allow for missing, delayed, duplicate or mismatched sales events. A visual discrepancy can result from entirely legitimate actions."},{"number":11,"title":"Enterprise — Multi-Location Vision","tier":"Enterprise","image":"slides/slide-11.png","thumb":"slides/slide-11.png","text":"ENTERPRISE  /  LONG-TERM VISION\nOne connected view\nacross every location.\nGive larger retail groups a consistent way to find, investigate, and learn from potential losses across stores.\nCentral visibility\nCross-store investigation\nFlexible deployment\nEnterprise controls\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n11","notes":"Enterprise is a multi-year strategic direction, not currently completed. Multi-store remote operation requires authorization, secure connectivity and validated cross-store data separation."},{"number":12,"title":"Enterprise — One Connected View","tier":"Enterprise","image":"slides/slide-12.png","thumb":"slides/slide-12.png","text":"ENTERPRISE VISION\nAn owner sees the whole operation—not 20 separate systems.\nA future multi-location workspace could bring incidents, transactions, and trends together.\nALCHEMY / MULTI-STORE OVERVIEW\nStore A\nStore B\nStore C\nStore-by-store exception review • Cross-location patterns • Case status\nAcross the chain\nConsistent incident views for authorized leadership.\nDeeper investigation\nSearch and compare selected evidence across locations.\nOperational discipline\nPermissions, audit trails, and controlled workflows.\nILLUSTRATIVE CONCEPT  •  NOT AN ACTUAL PRODUCT SCREEN\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n12","notes":"The central display is an illustrative concept created for investors. No current deployment count or live multi-store access is implied. A real enterprise product needs secure tenant separation, robust permissions, incident auditability, remote connectivity and support."},{"number":13,"title":"Commercial Model","tier":"Business","image":"slides/slide-13.png","thumb":"slides/slide-13.png","text":"COMMERCIAL LOGIC\nStart with access. Expand with measurable value.\nThe same product family can serve different budgets without making every customer buy enterprise complexity.\nAffordable\nLower barrier to entry\nLocal installation + essential review\nProfessional\nHigher-value capabilities\nAdvanced detections + live integrations\nEnterprise\nBroader organizational value\nMulti-store oversight + enterprise services\nPOTENTIAL PRICING: TIERED SOFTWARE + OPTIONAL SERVICE / INTEGRATION PACKAGES\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n13","notes":"This is a proposed commercial model, not approved pricing or a financial forecast. Pricing and unit economics remain to be tested with customers. Explain land-and-expand as an option, not a guarantee."},{"number":14,"title":"Competitive Direction","tier":"Business","image":"slides/slide-14.png","thumb":"slides/slide-14.png","text":"WHERE WE AIM TO COMPETE\nLearn from category leaders. Build our own advantage.\nOur ambition combines three proven product directions while focusing on real retail outcomes.\nSOLINK\nVideo + business records\nMake incidents easy to find and investigate.\nEVERSEEN\nCheckout understanding\nRecognize loss patterns while transactions happen.\nVEESION\nGesture recognition\nSpot selected high-risk physical actions.\nCompetitive inspiration—not feature parity, partnership, endorsement, or independently proven performance.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n14","notes":"Public product directions are summarized from solink.com, everseen.com and veesion.io. We do not have access to proprietary product stacks or independently comparable accuracy. Competition will be decided through verified outcomes, reliability, deployment and integration quality."},{"number":15,"title":"How We Measure Results","tier":"Business","image":"slides/slide-15.png","thumb":"slides/slide-15.png","text":"INVESTOR DISCIPLINE\nWe will measure results—not just model demos.\nA competitive product must perform in real shops and earn trust over time.\nUseful detections\nHow often relevant events are found\nFewer false alarms\nHow often staff are interrupted unnecessarily\nFaster reviews\nTime needed to understand an incident\nVerified loss impact\nFinancial value established in pilots\nNo validated detection accuracy, loss-reduction percentage, customer ROI, or deployment scale is claimed today.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n15","notes":"Metrics must come from a documented pilot protocol and measured outcomes, including holdout camera footage from unfamiliar environments. Investors should not be given fabricated customer testimonials or ROI claims."},{"number":16,"title":"Development Roadmap","tier":"Business","image":"slides/slide-16.png","thumb":"slides/slide-16.png","text":"EXECUTION ROADMAP\nBuild evidence first. Earn the right to scale.\nStage-based decisions rather than speculative promises about launch dates.\nNOW\nValidate the affordable product\nProve complete camera-to-evidence workflow\nTest on real Windows hardware and cameras\nConfirm install, security and licensing\nNEXT\nCreate the Professional advantage\nCollect and label representative retail footage\nBuild specialist behavior and checkout models\nPilot live business-data integrations\nLATER\nScale into Enterprise\nSecure multi-store infrastructure\nAdvanced investigation and analytics\nEstablish repeatable customer outcomes\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n16","notes":"This is a proposed sequence, not an externally committed schedule. Affordable engineering prototype still needs packaged end-to-end camera evidence proof, integrated Qwen inference proof, reproducible packaging, legal compliance review and physical field tests."},{"number":17,"title":"Where Investment Matters","tier":"Business","image":"slides/slide-17.png","thumb":"slides/slide-17.png","text":"WHERE INVESTMENT MATTERS\nCapital should fund an advantage customers can feel.\nInvestment priority follows evidence, not feature-count.\nREAL RETAIL DATA\nReal-world footage, reliable labels and evaluation sets.\nSPECIALIZED INTELLIGENCE\nBetter understanding of actions at checkout, on shelves and in stockrooms.\nDEPENDABLE DELIVERY\nSecure software, stronger hardware options and repeatable installations.\nREAL OPERATING PARTNERS\nPilot retailers, POS partners, and enterprise-ready support.\nProprietary commercialization also requires a deliberate model, code, and media-licensing strategy.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n17","notes":"Funding need is strategic and unpriced. Do not imply secured funding, trained proprietary models, licensing rights or paid customer traction. License compliance is a due diligence matter before proprietary commercialization."},{"number":18,"title":"Our Long-Term Vision","tier":"Vision","image":"slides/slide-18.png","thumb":"slides/slide-18.png","text":"ALCHEMY WATCHDOG\nStart within reach.\nScale with results.\nWe are building toward a unified retail loss-prevention platform—from one shop to an entire chain.\nSEEKING PILOT RETAIL PARTNERS & STRATEGIC CONVERSATIONS\nStrategy / October 2026","notes":"Close on both ambition and evidence-based execution. This deck is a product vision and early-stage investor discussion, not proof of commercial readiness or an investment offer. Ask for pilot validation partners and useful strategic conversations."},{"number":19,"title":"Important Investor Disclosures","tier":"Vision","image":"slides/slide-19.png","thumb":"slides/slide-19.png","text":"IMPORTANT CONTEXT\nWhat is built, what is planned, and what is unproven.\nTransparency protects investor trust and keeps the roadmap credible.\nAffordable\nReported engineering prototype; field and packaged end-to-end validation still pending.\nProfessional\nFuture capability plan; specialist retail behavior models and live connectors are not proven.\nEnterprise\nFuture strategic product; centralized multi-store capabilities are not current MVP deliverables.\nCommercial evidence\nNo independently verified accuracy, revenue, ROI, shrink reduction, or commercial parity claimed.\nSource basis: owner-supplied competitor research (October 2026); competitor product positioning on solink.com, everseen.com and veesion.io; current Alchemy engineering reports.\nImages are AI-generated editorial illustrations. Any dashboards or workflows shown are concepts, not real product screenshots, camera evidence, or documented customer deployments.\nALCHEMY / WATCHDOG\nILLUSTRATIVE INVESTOR MATERIAL • OCTOBER 2026\n19","notes":"Disclosure slide. Competition claims reflect public marketing and research rather than independently verified technical details. The current reported engineering checkpoint is 1,007 passing automated tests, one skip, no failures, but actual packaged E2E, Qwen, build, licensing, real CCTV and hardware acceptance remain unverified."}]</script>
+<script>
+(() => {
+  "use strict";
+  const slides = JSON.parse(document.getElementById("deck-json").textContent);
+  const total = slides.length;
+  const byId = (id) => document.getElementById(id);
+  const rail = byId("thumb-rail"), notesDrawer = byId("notes-drawer"), searchDrawer = byId("search-drawer");
+  let current = 0, notesMode = "notes", reading = false, readerBuilt = false, printBuilt = false;
+  function targetFromHash() {
+    const m = location.hash.match(/slide=(\d+)/);
+    return m ? Math.max(0, Math.min(total-1, Number(m[1])-1)) : 0;
+  }
+  function updateNotes() {
+    const slide = slides[current];
+    byId("notes-slide-name").textContent = "SLIDE " + String(current+1).padStart(2,"0") + " · " + slide.title;
+    byId("notes-content").textContent = notesMode === "notes" ? (slide.notes || "No speaker notes.") : slide.text;
+    byId("tab-notes").classList.toggle("selected", notesMode === "notes");
+    byId("tab-text").classList.toggle("selected", notesMode === "text");
+  }
+  function showSlide(index, fromHash=false) {
+    current = Math.max(0,Math.min(total-1,index));
+    const slide = slides[current];
+    const visual = byId("slide-visual");
+    visual.src = slide.image;
+    visual.alt = "Slide "+(current+1)+": "+slide.title;
+    byId("slide-title").textContent = slide.title;
+    const edition = byId("edition");
+    edition.textContent = slide.tier;
+    edition.className = "edition " + slide.tier;
+    const count = String(current+1).padStart(2,"0") + " / " + String(total).padStart(2,"0");
+    byId("counter").textContent = count;
+    byId("stage-count").textContent = count;
+    byId("progress-fill").style.width = ((current+1)/total*100)+"%";
+    byId("prev").disabled = current === 0;
+    byId("next").disabled = current === total-1;
+    byId("next").textContent = current === total-1 ? "End" : "Next →";
+    document.querySelectorAll(".thumb").forEach((item,i) => {
+      const active = i === current;
+      item.classList.toggle("active", active);
+      if (active) item.setAttribute("aria-current","true");
+      else item.removeAttribute("aria-current");
+    });
+    updateNotes();
+    if (!fromHash) history.replaceState(null,"","#slide="+(current+1));
+  }
+  const thumbnails = byId("thumb-list");
+  slides.forEach((slide,i) => {
+    const button = document.createElement("button");
+    button.className = "thumb";
+    button.setAttribute("aria-label","Go to slide "+slide.number+": "+slide.title);
+    const img = document.createElement("img");
+    img.src = slide.thumb;
+    img.alt = "";
+    img.loading = i > 8 ? "lazy" : "eager";
+    const meta = document.createElement("div");
+    meta.className = "thumb-meta";
+    const name = document.createElement("span");
+    name.className = "thumb-title";
+    name.textContent = slide.title;
+    const number = document.createElement("span");
+    number.className = "thumb-index";
+    number.textContent = String(slide.number).padStart(2,"0");
+    meta.append(name,number);
+    button.append(img,meta);
+    button.addEventListener("click",()=> {showSlide(i);if(window.innerWidth<781) rail.hidden=true;});
+    thumbnails.appendChild(button);
+  });
+  function closeDrawers() {notesDrawer.hidden=true; searchDrawer.hidden=true;}
+  function openDrawer(drawer) {closeDrawers();drawer.hidden=false; if(drawer===searchDrawer)byId("search-input").focus();}
+  function openNotes(){if(notesDrawer.hidden)openDrawer(notesDrawer);else notesDrawer.hidden=true;}
+  function escapeSnippet(text,query){
+    const flat = text.replace(/\s+/g," ").trim();
+    if(!query) return flat.slice(0,120);
+    const where=flat.toLowerCase().indexOf(query.toLowerCase());
+    return flat.slice(Math.max(0,where-28),Math.min(flat.length,Math.max(0,where-28)+155));
+  }
+  function runSearch(){
+    const query = byId("search-input").value.trim().toLowerCase();
+    const results = byId("search-results");
+    results.replaceChildren();
+    let found=0;
+    slides.forEach((slide,i)=>{
+      const matches = !query || (slide.title+" "+slide.text+" "+slide.notes+" "+slide.tier).toLowerCase().includes(query);
+      if(!matches)return;
+      found++;
+      const el=document.createElement("button");el.className="search-result";
+      const headline=document.createElement("strong");
+      headline.textContent=String(i+1).padStart(2,"0")+"  "+slide.title;
+      const sub=document.createElement("span");
+      sub.textContent=escapeSnippet(slide.text,query);
+      el.append(headline,sub);
+      el.addEventListener("click",()=>{showSlide(i);closeDrawers(); if(reading)byId("reading-slide-"+i)?.scrollIntoView({behavior:"smooth"});});
+      results.appendChild(el);
+    });
+    if(!found){const p=document.createElement("p");p.className="small-muted";p.textContent="No slides matched. Try another phrase.";results.appendChild(p);}
+  }
+  function buildReader() {
+    if(readerBuilt)return;
+    const container=byId("reader-inner");
+    slides.forEach((slide,i)=>{
+      const fig=document.createElement("figure");fig.className="reader-slide";fig.id="reading-slide-"+i;
+      const img=document.createElement("img");img.src=slide.image;img.loading="lazy";img.alt="Slide "+(i+1)+": "+slide.title;
+      const cap=document.createElement("figcaption");cap.textContent=String(i+1).padStart(2,"0")+" / "+String(total)+"  ·  "+slide.title;
+      fig.append(img,cap);container.appendChild(fig);
+    });
+    readerBuilt=true;
+  }
+  function toggleReader(){
+    reading=!reading;
+    document.body.classList.toggle("reading",reading);
+    if(reading){buildReader();byId("reader-toggle").textContent="◧ Slides";byId("reading-slide-"+current).scrollIntoView({block:"start"});}
+    else {byId("reader-toggle").textContent="☷ View";showSlide(current);}
+  }
+  function buildPrint(){
+    if(printBuilt)return;
+    const container=byId("print-deck");
+    slides.forEach(slide=>{
+      const fig=document.createElement("div");fig.className="print-slide";
+      const img=document.createElement("img");img.src=slide.image;img.alt=slide.title;
+      fig.appendChild(img);container.appendChild(fig);
+    });
+    printBuilt=true;
+  }
+  byId("prev").addEventListener("click",()=>showSlide(current-1));
+  byId("next").addEventListener("click",()=>showSlide(current+1));
+  byId("toggle-rail").addEventListener("click",()=>{rail.hidden=!rail.hidden;if(reading){reading=false;document.body.classList.remove("reading");}});
+  byId("notes-open").addEventListener("click",openNotes);
+  byId("notes-close").addEventListener("click",()=>notesDrawer.hidden=true);
+  byId("tab-notes").addEventListener("click",()=>{notesMode="notes";updateNotes()});
+  byId("tab-text").addEventListener("click",()=>{notesMode="text";updateNotes()});
+  byId("search-open").addEventListener("click",()=>{openDrawer(searchDrawer);runSearch();});
+  byId("search-close").addEventListener("click",()=>searchDrawer.hidden=true);
+  byId("search-input").addEventListener("input",runSearch);
+  byId("reader-toggle").addEventListener("click",toggleReader);
+  byId("fullscreen").addEventListener("click",()=>{
+    if(document.fullscreenElement)document.exitFullscreen?.();
+    else document.documentElement.requestFullscreen?.();
+  });
+  byId("print-button").addEventListener("click",()=>{buildPrint();setTimeout(()=>window.print(),80)});
+  window.addEventListener("beforeprint",buildPrint);
+  byId("help").addEventListener("click",()=>byId("help-modal").hidden=false);
+  byId("help-close").addEventListener("click",()=>byId("help-modal").hidden=true);
+  byId("help-modal").addEventListener("click",e=>{if(e.target.id==="help-modal")byId("help-modal").hidden=true});
+  window.addEventListener("hashchange",()=>showSlide(targetFromHash(),true));
+  window.addEventListener("keydown",e=>{
+    const tag=(document.activeElement?.tagName||"").toLowerCase();
+    if(tag==="input"||tag==="textarea") {if(e.key==="Escape"){closeDrawers();document.activeElement.blur();}return;}
+    if(e.key==="Escape"){closeDrawers();byId("help-modal").hidden=true;return;}
+    if(!byId("help-modal").hidden)return;
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){if(!reading){e.preventDefault();showSlide(current+1);}}
+    else if(e.key==="ArrowLeft"||e.key==="PageUp"){if(!reading){e.preventDefault();showSlide(current-1);}}
+    else if(e.key==="Home"){e.preventDefault();showSlide(0);}
+    else if(e.key==="End"){e.preventDefault();showSlide(total-1);}
+    else if(e.key.toLowerCase()==="t"){rail.hidden=!rail.hidden;}
+    else if(e.key.toLowerCase()==="n"){openNotes();}
+    else if(e.key.toLowerCase()==="v"){toggleReader();}
+    else if(e.key.toLowerCase()==="f"){byId("fullscreen").click();}
+    else if(e.key==="/"){e.preventDefault();openDrawer(searchDrawer);runSearch();}
+    else if(e.key==="?"){byId("help-modal").hidden=false;}
+  });
+  let touchStartX=null,touchStartY=null;
+  const frame = byId("frame-wrap");
+  frame.addEventListener("touchstart",e=>{
+    if(e.touches.length===1){touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;}
+  },{passive:true});
+  frame.addEventListener("touchend",e=>{
+    if(touchStartX===null||e.changedTouches.length!==1)return;
+    const dx=e.changedTouches[0].clientX-touchStartX,dy=e.changedTouches[0].clientY-touchStartY;
+    if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.4)showSlide(current+(dx<0?1:-1));
+    touchStartX=null;touchStartY=null;
+  },{passive:true});
+  showSlide(targetFromHash(),true);
+})();
+</script>
+</body>
+</html>

@@ -6,10 +6,10 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = p => readFileSync(resolve(root,p),'utf8');
 const pages = readdirSync(root).filter(f=>f.endsWith('.html'));
-const nav = ['index.html','watchdog.html','tallybook.html','solutions.html','about.html','learn.html','faq.html'];
+const nav = ['index.html','watchdog.html','tallybook.html','solutions.html','about.html','learn.html','faq.html','for-developer.html'];
 const refs = html => [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)].map(m=>m[1]);
-test('ten pages and essential assets exist',()=>{
-  assert.equal(pages.length,10);
+test('eleven pages and essential assets exist',()=>{
+  assert.equal(pages.length,11);
   for(const name of ['assets/app.js','assets/site-config.js','assets/style.css','assets/learning.js','assets/faq.js','assets/logo.svg'])assert.ok(existsSync(resolve(root,name)),name);
 });
 for(const file of pages){
@@ -69,4 +69,18 @@ test('academy has six accessible, illustrated modules and a functional lesson st
   for(let i=1;i<=6;i++) assert.ok(existsSync(resolve(root,'assets/learn/lesson-'+i+'.svg')),'missing SVG lesson '+i);
   assert.ok(existsSync(resolve(root,'assets/learn/academy-hero.svg')),'missing hero SVG');
   for(let i=0;i<6;i++)assert.ok(html.includes('data-explanation='),'answer explanations present');
+});
+
+
+test('For Developer landing and all 19 exact presentation slide images are tracked', () => {
+  const page=read('for-developer.html');
+  const viewer=read('developer/presentation.html');
+  assert.ok(page.includes('href="developer/presentation.html"'), 'landing links to presentation');
+  assert.ok(viewer.includes('id="deck-json"'), 'deck data is available');
+  assert.ok(!viewer.includes('data:image/png;base64,'), 'slide imagery is stored as local repository files');
+  for (let i=1;i<=19;i++) {
+    const path='developer/slides/slide-'+String(i).padStart(2,'0')+'.png';
+    assert.ok(existsSync(resolve(root,path)), 'missing slide '+i);
+    assert.ok(viewer.includes('slides/slide-'+String(i).padStart(2,'0')+'.png'), 'slide '+i+' not referenced');
+  }
 });

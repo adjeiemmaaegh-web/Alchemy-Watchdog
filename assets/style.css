@@ -1495,3 +1495,12 @@ button {
 @media(max-width:850px){.academy-hero-grid{grid-template-columns:1fr;padding:64px 0}.academy-hero-art{max-width:580px}.academy-intro-heading{align-items:stretch;flex-direction:column}.academy-total{width:100%;min-width:0}.academy-module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.academy-classroom-grid{grid-template-columns:1fr}.academy-sidebar{position:static}.academy-sidebar-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.academy-lesson-head{grid-template-columns:minmax(0,1fr) minmax(170px,.65fr)}}
 @media(max-width:600px){.academy-hero-grid{padding:52px 0 59px}.academy-hero h1{font-size:clamp(39px,10vw,53px)}.academy-hero-lead{font-size:15px}.academy-hero-facts{gap:13px;font-size:11px}.academy-intro,.academy-classroom{padding:55px 0}.academy-module-grid{grid-template-columns:1fr;gap:16px}.academy-module-image{aspect-ratio:720/330}.academy-module-image img{object-fit:cover}.academy-module-body{padding:20px}.academy-module p{min-height:0}.academy-sidebar-list{grid-template-columns:1fr}.academy-lesson{padding:19px;border-radius:16px}.academy-lesson-head{grid-template-columns:1fr}.academy-lesson-head img{max-width:100%;height:auto}.academy-quiz{padding:16px}.academy-lesson-controls{gap:9px}.academy-lesson-controls>*{flex:1 1 100%}.academy-outro-grid{grid-template-columns:1fr}.academy-hero-actions>*{flex:1 1 100%}}
 @media(prefers-reduced-motion:reduce){.academy-module,.academy-primary-cta{transition:none!important}.academy-module:hover,.academy-primary-cta:hover{transform:none!important}}
+
+/* Extra primary nav item: keep navigation usable at tablet and small-desktop widths. */
+@media (min-width:761px) and (max-width:1100px) {
+  .menu-toggle { display:block; }
+  .navlinks { display:none; position:absolute; left:0; right:0; top:76px; background:white; padding:22px;
+    border-bottom:1px solid var(--border); box-shadow:0 20px 30px #0c29471a; flex-direction:column; align-items:stretch; gap:20px; }
+  .navlinks.open { display:flex; }
+  .navcta .btn { display:none; }
+}
