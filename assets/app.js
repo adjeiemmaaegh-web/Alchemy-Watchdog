@@ -29,7 +29,7 @@
       if (links.classList.contains('open') && !event.target.closest('.nav')) close();
     });
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 980 && links.classList.contains('open')) close();
+      if (window.innerWidth > 1100 && links.classList.contains('open')) close();
     });
   }
 

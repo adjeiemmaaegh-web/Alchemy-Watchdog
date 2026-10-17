@@ -44,3 +44,11 @@ GitHub Actions installs Playwright Chromium in the CI environment and executes `
 - Six visual module cards, an illustrated hero, an accessible one-lesson-at-a-time learning flow (all lessons remain readable when JavaScript is disabled), action steps, responsible-usage callouts, quizzes with correct-answer explanations and Previous/Next actions.
 - Preserves previous course progress with the same `alchemy-watchdog-course-v1` browser storage key. State is device-local; resets never transmit data.
 - Browser CI verifies illustrations, one active lesson, module switching, course progress persistence and reset at responsive widths. Manual AT/Firefox/Safari reviews remain pending.
+
+## For Developer — stakeholder presentation
+- `for-developer.html`: a website section describing the Affordable, Professional, and Enterprise vision, with explicit current/future distinctions.
+- `developer/presentation.html`: the complete 19-slide investor deck, visually preserved from the PowerPoint.
+- `developer/slides/slide-01.png` through `slide-19.png`: locally hosted original slide images. A cloned/downloaded repository opens the presentation offline; no CDN or external images are needed for the deck.
+- The presentation retains navigation, full-screen mode, slide searching, speaker notes, reading view and print-to-PDF actions.
+- **Scope:** stakeholder/reference content only; it is not the shipping Windows Watchdog application, customer evidence, or an enterprise release announcement.
+- The original one-file, all-assets-embedded HTML and PowerPoint were not committed because this repository uses a maintainable multi-file website layout; the same rendered slides and notes are retained.
