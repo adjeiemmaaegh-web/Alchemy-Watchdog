@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test One — Alchemy Watchdog illustrated testing guide</title>
+  <meta name="description" content="Test One: an illustrated beginner-friendly, offline-capable Watchdog owner acceptance guide. Uses sample data and records local results.">
+  <style>
+    :root{
+      --blue:#2F80ED; --sky:#EAF6FF; --ink:#14304A; --soft:#F7FBFF; --green:#2E7D32;
+      --yellow:#FFF2B5; --orange:#F2994A; --red:#C62828; --pink:#FFEBEE; --card:#ffffff;
+      --shadow:0 10px 28px rgba(47,128,237,0.12);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#F7FBFF 0%,#ECF8FF 100%);color:var(--ink)}
+    header{padding:28px 18px 16px; text-align:center}
+    header h1{margin:8px 0 10px;font-size:clamp(28px,4vw,42px);color:var(--blue)}
+    header p{max-width:900px;margin:0 auto;font-size:18px;line-height:1.55}
+    .hero{max-width:1100px;margin:0 auto;padding:0 16px 8px}
+    .hero img{width:100%;border-radius:22px;box-shadow:var(--shadow);background:#fff}
+    .quick-boxes{max-width:1100px;margin:14px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:0 16px}
+    .qbox{background:var(--card);border:2px solid #CFE8FF;border-radius:18px;padding:16px;box-shadow:var(--shadow)}
+    .qbox h3{margin:0 0 8px;color:var(--blue)}
+    .path{font-family:"Courier New",monospace;background:#F3F8FF;border:1px dashed #9CCAFB;border-radius:12px;padding:10px;word-break:break-word;font-size:14px}
+    .adult-note{max-width:1100px;margin:18px auto 0;padding:0 16px}
+    .adult-card{display:flex;gap:16px;align-items:center;background:#FFF8E8;border:2px solid #F4C96D;border-radius:20px;padding:16px 18px;box-shadow:var(--shadow)}
+    .adult-card img{width:160px;max-width:30%}
+    main{max-width:1100px;margin:20px auto;padding:0 16px 32px}
+    .step{background:var(--card);border:2px solid #CFE8FF;border-radius:22px;box-shadow:var(--shadow);padding:18px;margin:18px 0}
+    .step h2{margin:0 0 8px;color:var(--blue);font-size:28px}
+    .step-grid{display:grid;grid-template-columns:minmax(280px,430px) 1fr;gap:20px;align-items:start}
+    .step img{width:100%;border-radius:18px;background:#F4FAFF;border:1px solid #D7EBFF}
+    .mini{font-size:14px;color:#49657D}
+    ol, ul{line-height:1.7}
+    .check-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .check-row label{border:2px solid #CEE7FF;padding:8px 12px;border-radius:14px;display:inline-flex;align-items:center;gap:8px;background:#FBFEFF;cursor:pointer}
+    .expect,.lookfor,.notesbox,.resultbox{background:#F8FCFF;border:1px solid #DDEEFF;border-radius:16px;padding:12px 14px;margin-top:12px}
+    .expect strong,.lookfor strong{color:var(--blue)}
+    textarea{width:100%;min-height:72px;border:1px solid #BBD9FB;border-radius:12px;padding:10px;font:inherit;resize:vertical;background:#fff}
+    .sample-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:15px}
+    .sample-table th,.sample-table td{border:1px solid #D9EBFF;padding:10px;text-align:left;vertical-align:top}
+    .sample-table th{background:#EEF7FF}
+    .summary{background:var(--card);border:2px solid #BFE1FF;border-radius:22px;box-shadow:var(--shadow);padding:20px;margin:24px 0}
+    .summary h2{color:var(--blue);margin-top:0}
+    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    button{appearance:none;border:none;border-radius:14px;padding:12px 16px;background:var(--blue);color:#fff;font-weight:bold;cursor:pointer;box-shadow:0 8px 18px rgba(47,128,237,0.18)}
+    button.secondary{background:#5E6C84}
+    button.light{background:#EAF6FF;color:var(--ink);border:1px solid #B6DBFF;box-shadow:none}
+    .footer{font-size:13px;color:#5E748B;text-align:center;padding:10px 16px 28px}
+    .badge{display:inline-block;border-radius:999px;background:#D8F6D8;color:#1B5E20;padding:6px 10px;font-weight:bold;font-size:13px}
+    .smallpath{font-family:"Courier New",monospace;font-size:13px;background:#F6FAFF;border:1px dashed #CAE4FF;padding:8px;border-radius:12px;display:block;word-break:break-word;margin-top:8px}
+    @media (max-width: 800px){.step-grid{grid-template-columns:1fr}.adult-card{flex-direction:column;align-items:flex-start}.adult-card img{max-width:100%;width:220px}}
+    @media print{button,.btns{display:none} body{background:#fff}.step,.summary,.qbox,.adult-card{box-shadow:none}}
+  </style>
+</head>
+<body>
+<nav aria-label="Alchemy site" style="max-width:1100px;margin:15px auto 0;padding:0 16px;font-size:16px"><a href="../index.html" style="color:#2F80ED;font-weight:bold">← Alchemy home</a> &nbsp; / &nbsp; <strong>Test One</strong></nav>
+  <header>
+    <h1>Test One — Alchemy Watchdog</h1><p style="font-weight:bold;color:#49657D">Illustrated Windows application testing adventure</p>
+    <p>
+      This guide was made from the Antigravity report so a young helper can carefully test the <strong>Watchdog</strong> app on a Windows computer. The drawings are illustrations, not real app screenshots.
+      It works <strong>offline</strong>. Follow the pictures, do one small step at a time, and mark <strong>PASS</strong> or <strong>NEED HELP</strong>.
+    </p>
+  </header>
+
+  <div class="hero">
+    <img src="images/hero.svg" alt="Friendly illustrated welcome image for Watchdog testing" />
+  </div>
+
+  <section class="quick-boxes">
+    <div class="qbox">
+      <h3>1) Open this folder</h3>
+      <div class="path">YOUR_WATCHDOG_PROJECT_FOLDER\dist\Alchemy Watchdog</div>
+    </div>
+    <div class="qbox">
+      <h3>2) Start this file</h3>
+      <div class="path">Start Dashboard.bat</div>
+    </div>
+    <div class="qbox">
+      <h3>3) Sample files live here</h3>
+      <div class="path">YOUR_WATCHDOG_PROJECT_FOLDER\tests\fixtures</div>
+    </div>
+    <div class="qbox">
+      <h3>4) Best rule</h3>
+      <p><span class="badge">If something feels scary or confusing, stop and ask a grown-up.</span></p>
+    </div>
+  </section>
+
+  <div class="adult-note"><p style="padding:10px 16px;background:#eaf6ff;border-radius:12px"><strong>Important:</strong> This webpage is only a testing guide. It does not install or run Watchdog. Find the packaged Windows application on your own PC. “YOUR_WATCHDOG_PROJECT_FOLDER” is a placeholder; locate your real project folder in File Explorer.</p>
+    <div class="adult-card">
+      <img src="images/adult-only.svg" alt="Adult only caution sign" />
+      <div>
+        <h3 style="margin:0 0 8px;color:#C97A00">Grown-up help is needed for these things</h3>
+        <ul>
+          <li>If Windows shows a security warning like <strong>“Windows protected your PC”</strong></li>
+          <li>If you need to change settings files, connect a real CCTV camera, or use real shop data</li>
+          <li>If the app will not open, freezes, or shows a scary error message</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="step" id="step1">
+      <h2>Step 1 — Open Watchdog</h2>
+      <div class="step-grid">
+        <img src="images/step1-open.svg" alt="Illustration showing opening the Alchemy Watchdog folder" />
+        <div>
+          <ol>
+            <li>Open <strong>File Explorer</strong>.</li>
+            <li>Go to the folder shown at the top of this guide.</li>
+            <li>Double-click <strong>Start Dashboard.bat</strong>.</li>
+            <li>Wait for a window called <strong>Alchemy Watchdog — Ghana Shop</strong>.</li>
+          </ol>
+          <div class="expect"><strong>You should see:</strong> a blue <strong>[ OFFLINE / LOCAL ]</strong> badge and a big dashboard window.</div>
+          <div class="lookfor"><strong>If Windows shows a warning:</strong> stop and ask a grown-up to help.</div>
+          <div class="check-row">
+            <label><input type="radio" name="step1" value="PASS"> PASS</label>
+            <label><input type="radio" name="step1" value="NEED HELP"> NEED HELP</label>
+            <label><input type="radio" name="step1" value="NOT TRIED"> NOT TRIED</label>
+          </div>
+          <div class="notesbox"><div class="mini">Notes for this step</div><textarea data-note="step1" placeholder="Example: The dashboard opened."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step2">
+      <h2>Step 2 — Meet the 5 Tabs</h2>
+      <div class="step-grid">
+        <img src="images/step2-tabs.svg" alt="Illustration of five tabs in the Watchdog dashboard" />
+        <div>
+          <p>Click each tab once to make sure it opens.</p>
+          <ul>
+            <li><strong>Dashboard Overview</strong></li>
+            <li><strong>Cashier &amp; Till Alerts</strong></li>
+            <li><strong>Incident Review Center</strong></li>
+            <li><strong>Import POS Sales CSV</strong></li>
+            <li><strong>Settings &amp; Tools</strong></li>
+          </ul>
+          <div class="expect"><strong>You should see:</strong> the tab content changes each time you click a new tab.</div>
+          <div class="check-row">
+            <label><input type="radio" name="step2" value="PASS"> PASS</label>
+            <label><input type="radio" name="step2" value="NEED HELP"> NEED HELP</label>
+            <label><input type="radio" name="step2" value="NOT TRIED"> NOT TRIED</label>
+          </div>
+          <div class="notesbox"><div class="mini">Notes for this step</div><textarea data-note="step2" placeholder="Example: All 5 tabs opened."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step3">
+      <h2>Step 3 — Preview a Sample CSV File</h2>
+      <div class="step-grid">
+        <img src="images/step3-preview.svg" alt="Illustration of choosing a sample CSV file" />
+        <div>
+          <ol>
+            <li>Click the <strong>Import POS Sales CSV</strong> tab.</li>
+            <li>Click <strong>Browse CSV...</strong>.</li>
+            <li>Go to this folder:</li>
+          </ol>
+          <span class="smallpath">YOUR_WATCHDOG_PROJECT_FOLDER\tests\fixtures\pos</span>
+          <ol start="4">
+            <li>Choose <strong>tolerant_ghana_export.csv</strong>.</li>
+            <li>Click <strong>Inspect &amp; Preview</strong>.</li>
+          </ol>
+          <div class="expect"><strong>You should see:</strong> preview text showing rows, amounts, or validation details.</div>
+          <div class="check-row">
+            <label><input type="radio" name="step3" value="PASS"> PASS</label>
+            <label><input type="radio" name="step3" value="NEED HELP"> NEED HELP</label>
+            <label><input type="radio" name="step3" value="NOT TRIED"> NOT TRIED</label>
+          </div>
+          <div class="notesbox"><div class="mini">Notes for this step</div><textarea data-note="step3" placeholder="Example: Preview showed several valid rows."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step4">
+      <h2>Step 4 — Import and Check Alerts</h2>
+      <div class="step-grid">
+        <img src="images/step4-alerts.svg" alt="Illustration showing alerts appearing after importing a CSV file" />
+        <div>
+          <ol>
+            <li>Still in the CSV tab, click <strong>Import to Watchdog</strong>.</li>
+            <li>After import, click the <strong>Cashier &amp; Till Alerts</strong> tab.</li>
+            <li>Click <strong>Refresh Alerts</strong>.</li>
+          </ol>
+          <p>For a stronger test, try these extra sample files one by one:</p>
+          <ul>
+            <li><strong>refunds_and_voids.csv</strong></li>
+            <li><strong>discounts_and_no_sales.csv</strong></li>
+            <li><strong>repeated_adjustments.csv</strong></li>
+          </ul>
+          <div class="expect"><strong>You should see:</strong> alerts with types like refund, discount, matched, unmatched, or ambiguous.</div>
+          <div class="lookfor"><strong>Good sign:</strong> The app shows alerts as <em>things to review</em>, not accusations.</div>
+          <div class="check-row">
+            <label><input type="radio" name="step4" value="PASS"> PASS</label>
+            <label><input type="radio" name="step4" value="NEED HELP"> NEED HELP</label>
+            <label><input type="radio" name="step4" value="NOT TRIED"> NOT TRIED</label>
+          </div>
+          <div class="notesbox"><div class="mini">Notes for this step</div><textarea data-note="step4" placeholder="Example: Refund alerts appeared."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step5">
+      <h2>Step 5 — Review Incidents</h2>
+      <div class="step-grid">
+        <img src="images/step5-incidents.svg" alt="Illustration of reviewing incidents in the Incident Review Center" />
+        <div>
+          <ol>
+            <li>Click the <strong>Incident Review Center</strong> tab.</li>
+            <li>Click <strong>Refresh Cases</strong>.</li>
+            <li>Look for case rows that show a summary, priority, till, or decision.</li>
+          </ol>
+          <p>You may also try the extra launcher in the app folder:</p>
+          <span class="smallpath">Review Incidents.bat</span>
+          <div class="expect"><strong>You should see:</strong> incidents or cases that can be reviewed.</div>
+          <div class="check-row">
+            <label><input type="radio" name="step5" value="PASS"> PASS</label>
+            <label><input type="radio" name="step5" value="NEED HELP"> NEED HELP</label>
+            <label><input type="radio" name="step5" value="NOT TRIED"> NOT TRIED</label>
+          </div>
+          <div class="notesbox"><div class="mini">Notes for this step</div><textarea data-note="step5" placeholder="Example: Incident list showed one open case."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step6">
+      <h2>Step 6 — Try the AI Demo</h2>
+      <div class="step-grid">
+        <img src="images/step6-ai.svg" alt="Illustration of the AI demo with a friendly bubble" />
+        <div>
+          <ol>
+            <li>Close the dashboard if you need to.</li>
+            <li>In the same app folder, double-click <strong>Try CPU AI.bat</strong>.</li>
+            <li>Choose one of the synthetic incident examples.</li>
+            <li>Read the explanation.</li>
+          </ol>
+          <div class="expect"><strong>You should see:</strong> a local AI explanation that sounds careful and includes the idea that <strong>human review is required</strong>.</div>
+          <div class="lookfor"><strong>Good sign:</strong> it should not call anyone a thief.</div>
+          <div class="check-row">
+            <label><input type="radio" name="step6" value="PASS"> PASS</label>
+            <label><input type="radio" name="step6" value="NEED HELP"> NEED HELP</label>
+            <label><input type="radio" name="step6" value="NOT TRIED"> NOT TRIED</label>
+          </div>
+          <div class="notesbox"><div class="mini">Notes for this step</div><textarea data-note="step6" placeholder="Example: AI wrote a safe explanation."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step7">
+      <h2>Step 7 — Try the CCTV Viewer</h2>
+      <div class="step-grid">
+        <img src="images/step7-viewer.svg" alt="Illustration of the viewer with a green detection box" />
+        <div>
+          <p>This step is okay with sample video. Do <strong>not</strong> connect a real store camera without a grown-up.</p>
+          <ol>
+            <li>In the app folder, double-click <strong>Start Viewer.bat</strong>.</li>
+            <li>If the viewer opens, try these keys:</li>
+          </ol>
+          <ul>
+            <li><strong>D</strong> = show detection boxes</li>
+            <li><strong>T</strong> = show tracking</li>
+            <li><strong>Z</strong> = show zones</li>
+            <li><strong>Q</strong> = quit viewer</li>
+          </ul>
+          <div class="expect"><strong>You should see:</strong> a viewer window and maybe a sample video with boxes or overlays.</div>
+          <div class="lookfor"><strong>If it does not open:</strong> mark NEED HELP and write what happened.</div>
+          <div class="check-row">
+            <label><input type="radio" name="step7" value="PASS"> PASS</label>
+            <label><input type="radio" name="step7" value="NEED HELP"> NEED HELP</label>
+            <label><input type="radio" name="step7" value="NOT TRIED"> NOT TRIED</label>
+          </div>
+          <div class="notesbox"><div class="mini">Notes for this step</div><textarea data-note="step7" placeholder="Example: Viewer opened and Q closed it."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" id="step8">
+      <h2>Step 8 — Finish Your Report</h2>
+      <div class="step-grid">
+        <img src="images/step8-report.svg" alt="Illustration of a final report checklist" />
+        <div>
+          <p>Use the report section below. It will collect your test marks and notes. Then you can print or save it for the grown-up.</p>
+          <div class="expect"><strong>Goal:</strong> Make it easy to tell the developer what worked and what needs fixing.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step">
+      <h2>Safe Sample Files</h2>
+      <p>These are useful sample files from the Antigravity report. It is best to <strong>copy them to the Desktop first</strong> before testing.</p>
+      <table class="sample-table">
+        <tr><th>File</th><th>What it is for</th></tr>
+        <tr><td>tolerant_ghana_export.csv</td><td>Normal Ghanaian POS sample. Good for the first import test.</td></tr>
+        <tr><td>refunds_and_voids.csv</td><td>Can create higher-priority cashier alerts.</td></tr>
+        <tr><td>discounts_and_no_sales.csv</td><td>Tests discounts and no-sale patterns.</td></tr>
+        <tr><td>repeated_adjustments.csv</td><td>Tests repeated transaction adjustment patterns.</td></tr>
+        <tr><td>legitimate_sales_ghana.csv</td><td>Mostly normal sales.</td></tr>
+        <tr><td>inconsistent_and_corrupt.csv</td><td>Used to see if errors are handled safely.</td></tr>
+        <tr><td>test_sample.mp4</td><td>Sample video for the CCTV viewer.</td></tr>
+      </table>
+    </section>
+
+    <section class="summary">
+      <h2>My Watchdog Test Report</h2>
+      <p>Fill in your name and the date. Then click <strong>Build Report</strong>.</p>
+      <div class="step-grid" style="grid-template-columns:1fr 1fr">
+        <div>
+          <label><strong>Tester name</strong><br><input id="testerName" style="width:100%;padding:10px;border-radius:12px;border:1px solid #BBD9FB" placeholder="Your name" /></label>
+        </div>
+        <div>
+          <label><strong>Date</strong><br><input id="testDate" style="width:100%;padding:10px;border-radius:12px;border:1px solid #BBD9FB" placeholder="YYYY-MM-DD" /></label>
+        </div>
+      </div>
+      <div class="btns">
+        <button onclick="buildReport()">Build Report</button>
+        <button class="light" onclick="copyReport()">Copy Report</button>
+        <button class="secondary" onclick="window.print()">Print or Save as PDF</button>
+        <button class="light" onclick="clearGuide()">Clear My Answers</button>
+      </div>
+      <div class="resultbox">
+        <div class="mini">Report text</div>
+        <textarea id="reportText" style="min-height:260px" placeholder="Your report will appear here."></textarea>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">
+    Built from the Antigravity owner acceptance report. This guide avoids real business data, real employee accusations, and risky setup steps.
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'watchdog-child-guide-v1';
+
+    function saveState(){
+      const state = {
+        testerName: document.getElementById('testerName').value,
+        testDate: document.getElementById('testDate').value,
+        notes: {},
+        radios: {}
+      };
+      document.querySelectorAll('textarea[data-note]').forEach(el => state.notes[el.dataset.note] = el.value);
+      document.querySelectorAll('input[type=radio]:checked').forEach(el => state.radios[el.name] = el.value);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) {
+        document.getElementById('testDate').value = new Date().toISOString().slice(0,10);
+        return;
+      }
+      try{
+        const state = JSON.parse(raw);
+        if(state.testerName) document.getElementById('testerName').value = state.testerName;
+        document.getElementById('testDate').value = state.testDate || new Date().toISOString().slice(0,10);
+        Object.entries(state.notes || {}).forEach(([k,v]) => {
+          const el = document.querySelector(`textarea[data-note="${k}"]`);
+          if(el) el.value = v;
+        });
+        Object.entries(state.radios || {}).forEach(([k,v]) => {
+          const el = document.querySelector(`input[type=radio][name="${k}"][value="${v}"]`);
+          if(el) el.checked = true;
+        });
+      }catch(e){
+        console.warn(e);
+      }
+    }
+
+    function buildReport(){
+      saveState();
+      const name = document.getElementById('testerName').value || '(no name)';
+      const date = document.getElementById('testDate').value || '(no date)';
+      const steps = [
+        ['Step 1 - Open Watchdog','step1'],
+        ['Step 2 - Meet the 5 Tabs','step2'],
+        ['Step 3 - Preview a Sample CSV File','step3'],
+        ['Step 4 - Import and Check Alerts','step4'],
+        ['Step 5 - Review Incidents','step5'],
+        ['Step 6 - Try the AI Demo','step6'],
+        ['Step 7 - Try the CCTV Viewer','step7']
+      ];
+      let text = `Alchemy Watchdog Test Report\nTester: ${name}\nDate: ${date}\n\n`;
+      steps.forEach(([label,key]) => {
+        const status = (document.querySelector(`input[name="${key}"]:checked`) || {}).value || 'NOT TRIED';
+        const note = (document.querySelector(`textarea[data-note="${key}"]`) || {}).value || '';
+        text += `${label}: ${status}\n`;
+        if(note.trim()) text += `Note: ${note.trim()}\n`;
+        text += `\n`;
+      });
+      text += `Important safety notes:\n`;
+      text += `- Real shop cameras, real employee investigation, and changing settings are grown-up tasks.\n`;
+      text += `- This report was made using the illustrated offline guide.\n`;
+      document.getElementById('reportText').value = text;
+    }
+
+    function copyReport(){
+      const box = document.getElementById('reportText');
+      box.select();
+      box.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+      alert('Report copied.');
+    }
+
+    function clearGuide(){
+      if(!confirm('Clear all saved answers?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+
+    document.addEventListener('input', saveState);
+    document.addEventListener('change', saveState);
+    loadState();
+    buildReport();
+  </script>
+</body>
+</html>

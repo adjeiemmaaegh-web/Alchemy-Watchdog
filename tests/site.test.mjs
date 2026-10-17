@@ -84,3 +84,17 @@ test('For Developer landing and all 19 exact presentation slide images are track
     assert.ok(viewer.includes('slides/slide-'+String(i).padStart(2,'0')+'.png'), 'slide '+i+' not referenced');
   }
 });
+
+
+test('Test One guide and local illustrations are present',()=>{
+ const html=read('test-one/index.html');
+ assert.ok(html.includes('Test One — Alchemy Watchdog'));
+ assert.ok(html.includes('adult-note'));
+ assert.ok(html.includes('function buildReport'));
+ assert.ok(!html.includes('C:\\Users\\adjei'),'no personal Windows path on public site');
+ for (const name of ["hero.svg","step1-open.svg","step2-tabs.svg","step3-preview.svg","step4-alerts.svg","step5-incidents.svg","step6-ai.svg","step7-viewer.svg","step8-report.svg","adult-only.svg"]) {
+   assert.ok(existsSync(resolve(root,'test-one/images/'+name)),name);
+   assert.ok(html.includes('images/'+name),name+' linked');
+ }
+ assert.ok(read('index.html').includes('href="test-one/index.html"'));
+});
