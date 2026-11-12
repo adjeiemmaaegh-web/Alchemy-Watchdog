@@ -1497,7 +1497,7 @@ button {
 @media(prefers-reduced-motion:reduce){.academy-module,.academy-primary-cta{transition:none!important}.academy-module:hover,.academy-primary-cta:hover{transform:none!important}}
 
 /* Extra primary nav item: keep navigation usable at tablet and small-desktop widths. */
-@media (min-width:761px) and (max-width:1100px) {
+@media (min-width:761px) and (max-width:1360px) {
   .menu-toggle { display:block; }
   .navlinks { display:none; position:absolute; left:0; right:0; top:76px; background:white; padding:22px;
     border-bottom:1px solid var(--border); box-shadow:0 20px 30px #0c29471a; flex-direction:column; align-items:stretch; gap:20px; }

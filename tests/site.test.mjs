@@ -6,10 +6,10 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = p => readFileSync(resolve(root,p),'utf8');
 const pages = readdirSync(root).filter(f=>f.endsWith('.html'));
-const nav = ['index.html','watchdog.html','tallybook.html','solutions.html','about.html','learn.html','faq.html','for-developer.html'];
+const nav = ['index.html','watchdog.html','tallybook.html','solutions.html','about.html','learn.html','faq.html','for-developer.html','remaining-steps.html'];
 const refs = html => [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)].map(m=>m[1]);
-test('eleven pages and essential assets exist',()=>{
-  assert.equal(pages.length,11);
+test('twelve pages and essential assets exist',()=>{
+  assert.equal(pages.length,12);
   for(const name of ['assets/app.js','assets/site-config.js','assets/style.css','assets/learning.js','assets/faq.js','assets/logo.svg'])assert.ok(existsSync(resolve(root,name)),name);
 });
 for(const file of pages){
@@ -97,4 +97,11 @@ test('Test One guide and local illustrations are present',()=>{
    assert.ok(html.includes('images/'+name),name+' linked');
  }
  assert.ok(read('index.html').includes('href="test-one/index.html"'));
+});
+
+test('remaining steps page is linked, scoped and evidence-oriented',()=>{
+ const html=read('remaining-steps.html');
+ for(const marker of ['id="engineering"','id="field"','id="release"','id="telegram"','id="later"','id="decision"','TELEGRAM_WEBHOOK_SECRET','not a live task board']) assert.ok(html.includes(marker),marker);
+ assert.ok(read('index.html').includes('href="remaining-steps.html"'));
+ assert.ok(existsSync(resolve(root,'assets/remaining-steps.css')));
 });
